@@ -58,3 +58,8 @@ urlpatterns = [
     path('change_password', Change_Password, name="change_password"),
     path('send_feedback/(?P<pid>[0-9]+)', Feedback, name='send_feedback'),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

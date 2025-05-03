@@ -124,3 +124,29 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+import dj_database_url
+import django_heroku  # Optional but helpful
+
+# Allow all hosts for now, restrict later if needed
+ALLOWED_HOSTS = ['*']
+
+# Use whitenoise to serve static files efficiently
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
+# Configure static and media settings
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Simplified static file serving.
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# For Render Postgres (if switching from sqlite)
+# DATABASES['default'] = dj_database_url.config(default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'))
+
+# Optional: Activate Django-Heroku settings (helps with Render deploys)
+django_heroku.settings(locals())
+
+
